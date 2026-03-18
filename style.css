@@ -59,7 +59,7 @@ aside{
     height: 100vh;
     background-color: gray;
     position: absolute;
-    display:none;
+    display: flex !important;
     flex-direction: column;
     align-items: center;
 
