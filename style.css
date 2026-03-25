@@ -43,12 +43,18 @@ article{
     background-color: gray;
     justify-content: center;
     padding: 20px;
+   
+}
+.nav{
+    cursor: pointer;
 }
 .article-wrapper{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center ;
+    overflow: auto;
+    height: 70vh;
 }
 article img{
     width: 80%;
@@ -73,4 +79,21 @@ aside a {
 #login{
     color: white;
 }
-
+.nawigacja-box{
+    width: 80%;
+    height: 100px;
+    background-color: rgb(66, 66, 66);
+    display: none;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+    flex-direction: column;
+    align-items: center;
+}
+.nawigacja-box .visible{
+display: flex;
+}
+.nawigacja-box form{
+    display: flex;
+    flex-direction: column;
+}

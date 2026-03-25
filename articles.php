@@ -22,18 +22,23 @@ $zalogowany = isset($_SESSION['zalogowany']) && $_SESSION['zalogowany'] === true
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction:column;
         }
         .dodawanie-box{
             width: 50%;
-            height: 600px;
+            height: 400px;
             background-color: gray;
-            margin: 100px 0;
+            margin: 40px 0;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
         }
         .dodawanie-box h1{
+            color: white;
+            font-size: 60px;
+        }
+         .usuwanie-box h1{
             color: white;
             font-size: 60px;
         }
@@ -49,6 +54,16 @@ $zalogowany = isset($_SESSION['zalogowany']) && $_SESSION['zalogowany'] === true
             margin: 10px;
             font-size:20px;
             font-weight: bold;
+        }
+        .usuwanie-box{
+            width: 50%;
+            height: 400px;
+            background-color: gray;
+            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
     </style>
 </head>
@@ -79,23 +94,68 @@ $zalogowany = isset($_SESSION['zalogowany']) && $_SESSION['zalogowany'] === true
         <main>
             <div class="dodawanie-box">
                 <h1>Dodaj Swój artykuł</h1>
-            <form action="index.php" method="post">
+            <form  method="POST">
                 <input type="text" name="naglowek" placeholder="Wpisz Naglowek artykulu">
                 <input type="text" name="opis" placeholder="Wpisz zawartosc artykulu">
                 <input type="text" name="img" placeholder="Wklej link do zdjecia ">
                 <input type="submit" name="send" value="Wyslij"> 
            </form>
             </div>
+
+            <div class="usuwanie-box">
+                <h1>Usuń  artykuł</h1>
+            <form  method="POST">
+                
+                <input type="number" name="usun" placeholder="Podaj id artykułu który chcesz usunąć ">
+                <input type="submit" name="send2" value="Wyslij"> 
+           </form>
+                <!-- 
+           
+               <form  method="POST">
+                
+                <input type="text" name="title" placeholder="Zmień tytuł: ">
+                <input type="text" name="desc" placeholder="Zmień opis: ">
+                <input type="text" name="image" placeholder="Zmień zdjecie: ">
+                <input type="number" name="id" placeholder="JAkie id chcesz zmienić: ">
+                <input type="submit" name="send2" value="Wyslij"> 
+           </form>
+           
+                -->
+ 
+
+
+            </div>
            <?php
-           if(!empty($_POST['naglowek']) && !empty($_POST['opis']) && !empty($_POST['img'])){
+           
+           if(!empty($_POST['naglowek']) && !empty($_POST['opis']) && !empty($_POST['img']) && isset($_POST['send'])){
                  $naglowek = $_POST["naglowek"];
             $opis = $_POST["opis"];
             $img = $_POST["img"];
+
+            $query = "INSERT INTO articles VALUES (NULL,'$naglowek','$opis','$img');";
+            mysqli_query($polaczenie, $query);
            }
+
+           if(!empty($_POST['usun'])  && isset($_POST['send2'])){
+               
+            $usun = $_POST["usun"];
+
+           $query2 = "DELETE FROM `articles` WHERE id = $usun;";
+            mysqli_query($polaczenie, $query2);
+           }
+        //           if(!empty($_POST['usun'])  && isset($_POST['send2'])){
+               
+        //                  $title = $_POST["title"];
+        //     $desc = $_POST["desc"];
+        //     $image = $_POST["image"];
+        //     $id = $_POST['id']
+
+        //    $query3 = "UPDATE `articles` SET ,`title`='$title',`opis`='$desc',`img`='$image' WHERE id= $id;";
+        //     mysqli_query($polaczenie, $query3);
+        //    }
        
 
-            $query = "INSERT INTO `articles`( `title`, `opis`, `img`) VALUES ('$naglowek','$opis','$img');";
-            mysqli_query($polaczenie, $query);
+           
 
            ?>
         </main>
