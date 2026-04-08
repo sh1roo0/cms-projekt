@@ -4,8 +4,9 @@ $polaczenie = mysqli_connect('localhost','root','','cms');
 
 
 $users = array(
-    array("User" => "login1" , "Password" => "1234"),
-    array("User" => "login2" , "Password" => "1234")
+    array("User" => "login1" , "Password" => "1234", "Rola" => "Admin"),
+    array("User" => "login2" , "Password" => "1234","Rola" => "Normal"),
+    array("User" => "login3" , "Password" => "1234","Rola" => "Premium"),
 );
 
 $islogged = false;
@@ -16,16 +17,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $haslo = $_POST['haslo'] ?? '';
 
     foreach($users as $u){
-        if($login == $u["User"] && $haslo == $u["Password"] ){
-            $islogged = true;
+        if($login == $u["User"] && $haslo == $u["Password"]  ){
+            if( $u["Rola"] == 'Admin'){
+              $Admin = true;   
+              $islogged = true;
+            }
+            if( $u["Rola"] == 'Premium'){
+                $Premium = true;
+                $islogged = true;
+            }
+            if($u["Rola"] == 'Normal'){
+                $Normal = true;
+                $islogged = true;
+            }
+            
+           
             break;
         }
+
     }
 
     if($islogged == true){
+        if($Admin == true){
+            $_SESSION['Admin'] = true; 
+            $_SESSION['zalogowany'] = true; 
+            header("Location: index.php");
+            exit();
+        }
+        if($Premium == true){
+            $_SESSION['Premium'] = true; 
+            $_SESSION['zalogowany'] = true; 
+            header("Location: index.php");
+            exit();
+        }
+        if($Normal == true){
+            $_SESSION['Normal'] = true; 
+            $_SESSION['zalogowany'] = true; 
+            header("Location: index.php");
+            exit();
+        }
         $_SESSION['zalogowany'] = true; 
-        header("Location: index.php");
-        exit();
+        
+ 
     }
 }
 ?>

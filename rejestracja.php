@@ -98,13 +98,13 @@ $zalogowany = isset($_SESSION['zalogowany']) && $_SESSION['zalogowany'] === true
         
         <main>
             <div class="dodawanie-box">
-                <h1>Dodaj Swój artykuł</h1>
+                <h1>Zarejestruj się</h1>
             <form  method="POST">
-                <input type="text" name="naglowek" placeholder="Wpisz Naglowek artykulu">
-                <input type="text" name="opis" placeholder="Wpisz zawartosc artykulu">
-                <input type="text" name="img" placeholder="Wklej link do zdjecia ">
-                <p>Czy artukul ma byc premium</p>
-                <input type="checkbox" name="premium" id=""  >
+                <input type="text" name="name" placeholder="Wpisz Imię ">
+                <input type="text" name="surname" placeholder="Wpisz Nazwisko ">
+                <input type="text" name="login" placeholder="Wpisz login ">
+                <input type="text" name="haslo" placeholder="Wpisz haslo ">
+                <input type="text" name="mail" placeholder="Wpisz Email ">
                 <input type="submit" name="send" value="Wyslij"> 
            </form>
             </div>
@@ -157,6 +157,8 @@ $zalogowany = isset($_SESSION['zalogowany']) && $_SESSION['zalogowany'] === true
            $query2 = "DELETE FROM `articles` WHERE id = $usun;";
             mysqli_query($polaczenie, $query2);
            }
+
+           
         //           if(!empty($_POST['usun'])  && isset($_POST['send2'])){
                
         //                  $title = $_POST["title"];
